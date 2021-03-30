@@ -1,0 +1,40 @@
+let
+    /* Read a positive integer from the standard input.
+       Returns -1 on error */
+    function read_unsigned() : int =
+      /* ... complete here ... */
+      let
+        var str : string :="" /* contiendra nos char */
+        var is_numerique : int := 1 /* pour savoir si c'est un bien une valeur numerique */
+        var sortie :int := 0        /* la valeur de la sortie */
+      in
+        str := getchar();
+        if str="\n" then(
+            is_numerique :=0
+        );
+        while is_numerique do(
+            if(str = "\n")then ( /* fin de chaine */
+                break
+            )else (
+                if(ord(str)>=48 & ord(str)<=57)then( /* notre caractere est un nombre */
+                    sortie := sortie*10;
+                    sortie := sortie+(ord(str)-48)
+                )else(
+                    is_numerique := 0; /* la valeur n'est pas une valeur numerique */
+                    break
+                )
+            );
+            str := getchar()
+        );  
+        if(is_numerique) then
+            sortie
+        else
+            -1
+      end
+        
+    var a : int := read_unsigned()
+  
+in
+    print_int(a*2);
+    print("\n")
+end

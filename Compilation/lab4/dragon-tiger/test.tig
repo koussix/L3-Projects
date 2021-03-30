@@ -1,0 +1,11 @@
+let 
+    var a:=10
+    var b:=()
+in
+    while(a)do
+    (
+        a:=a-1;
+        break;
+        print_int(a)
+    )  
+end

@@ -1,0 +1,2395 @@
+Terminaux inutilisés dans la grammaire
+
+    "{"
+    "}"
+    TYPE
+    OF
+
+
+Grammaire
+
+    0 $accept: program "end of file"
+
+    1 program: expr
+
+    2 decl: varDecl
+    3     | funcDecl
+
+    4 expr: stringExpr
+    5     | seqExpr
+    6     | var
+    7     | callExpr
+    8     | opExpr
+    9     | negExpr
+   10     | assignExpr
+   11     | whileExpr
+   12     | forExpr
+   13     | breakExpr
+   14     | letExpr
+   15     | intExpr
+   16     | ifthenelseExpr
+
+   17 varDecl: "var" "id" typeannotation ":=" expr
+
+   18 funcDecl: "function" "id" "(" params ")" typeannotation "=" expr
+
+   19 intExpr: "integer"
+
+   20 stringExpr: "string"
+
+   21 var: "id"
+
+   22 callExpr: "id" "(" arguments ")"
+
+   23 negExpr: "-" expr
+
+   24 opExpr: expr "+" expr
+   25       | expr "-" expr
+   26       | expr "*" expr
+   27       | expr "/" expr
+   28       | expr "=" expr
+   29       | expr "<>" expr
+   30       | expr "<" expr
+   31       | expr ">" expr
+   32       | expr "<=" expr
+   33       | expr ">=" expr
+   34       | expr "&" expr
+   35       | expr "|" expr
+
+   36 assignExpr: "id" ":=" expr
+
+   37 whileExpr: "while" expr "do" expr
+
+   38 ifthenelseExpr: "if" expr "then" expr "else" expr
+   39               | "if" expr "then" expr
+
+   40 forExpr: "for" "id" ":=" expr "to" expr "do" expr
+
+   41 breakExpr: "break"
+
+   42 letExpr: "let" decls "in" exprs "end"
+
+   43 seqExpr: "(" exprs ")"
+
+   44 exprs: %empty
+   45      | nonemptyexprs
+
+   46 nonemptyexprs: expr
+   47              | nonemptyexprs ";" expr
+
+   48 arguments: %empty
+   49          | nonemptyarguments
+
+   50 nonemptyarguments: expr
+   51                  | nonemptyarguments "," expr
+
+   52 params: %empty
+   53       | nonemptyparams
+
+   54 nonemptyparams: param
+   55               | nonemptyparams "," param
+
+   56 decls: %empty
+   57      | decls decl
+
+   58 param: "id" ":" "id"
+
+   59 typeannotation: %empty
+   60               | ":" "id"
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+    "end of file" (0) 0
+    error (256)
+    "," (258) 51 55
+    ":" (259) 58 60
+    ";" (260) 47
+    "(" (261) 18 22 43
+    ")" (262) 18 22 43
+    "{" (263)
+    "}" (264)
+    "+" (265) 24
+    "-" (266) 23 25
+    "*" (267) 26
+    "/" (268) 27
+    "=" (269) 18 28
+    "<>" (270) 29
+    "<" (271) 30
+    "<=" (272) 32
+    ">" (273) 31
+    ">=" (274) 33
+    "&" (275) 34
+    "|" (276) 35
+    ":=" (277) 17 36 40
+    "if" (278) 38 39
+    "then" (279) 38 39
+    "else" (280) 38
+    "while" (281) 37
+    "for" (282) 40
+    "to" (283) 40
+    "do" (284) 37 40
+    "let" (285) 42
+    "in" (286) 42
+    "end" (287) 42
+    "break" (288) 41
+    "function" (289) 18
+    "var" (290) 17
+    "uminus" (291)
+    "id" <Symbol> (292) 17 18 21 22 36 40 58 60
+    "string" <Symbol> (293) 20
+    "integer" <int> (294) 19
+    TYPE (295)
+    OF (296)
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+    $accept (42)
+        à gauche: 0
+    program <Expr *> (43)
+        à gauche: 1
+        à droite: 0
+    decl <Decl *> (44)
+        à gauche: 2 3
+        à droite: 57
+    expr <Expr *> (45)
+        à gauche: 4 5 6 7 8 9 10 11 12 13 14 15 16
+        à droite: 1 17 18 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 46 47 50 51
+    varDecl <Decl *> (46)
+        à gauche: 17
+        à droite: 2
+    funcDecl <Decl *> (47)
+        à gauche: 18
+        à droite: 3
+    intExpr <Expr *> (48)
+        à gauche: 19
+        à droite: 15
+    stringExpr <Expr *> (49)
+        à gauche: 20
+        à droite: 4
+    var <Expr *> (50)
+        à gauche: 21
+        à droite: 6
+    callExpr <Expr *> (51)
+        à gauche: 22
+        à droite: 7
+    negExpr <Expr *> (52)
+        à gauche: 23
+        à droite: 9
+    opExpr <Expr *> (53)
+        à gauche: 24 25 26 27 28 29 30 31 32 33 34 35
+        à droite: 8
+    assignExpr <Expr *> (54)
+        à gauche: 36
+        à droite: 10
+    whileExpr <Expr *> (55)
+        à gauche: 37
+        à droite: 11
+    ifthenelseExpr <Expr *> (56)
+        à gauche: 38 39
+        à droite: 16
+    forExpr <Expr *> (57)
+        à gauche: 40
+        à droite: 12
+    breakExpr <Expr *> (58)
+        à gauche: 41
+        à droite: 13
+    letExpr <Expr *> (59)
+        à gauche: 42
+        à droite: 14
+    seqExpr <Expr *> (60)
+        à gauche: 43
+        à droite: 5
+    exprs <std::vector<Expr *>> (61)
+        à gauche: 44 45
+        à droite: 42 43
+    nonemptyexprs <std::vector<Expr *>> (62)
+        à gauche: 46 47
+        à droite: 45 47
+    arguments <std::vector<Expr *>> (63)
+        à gauche: 48 49
+        à droite: 22
+    nonemptyarguments <std::vector<Expr *>> (64)
+        à gauche: 50 51
+        à droite: 49 51
+    params <std::vector<VarDecl *>> (65)
+        à gauche: 52 53
+        à droite: 18
+    nonemptyparams <std::vector<VarDecl *>> (66)
+        à gauche: 54 55
+        à droite: 53 55
+    decls <std::vector<Decl *>> (67)
+        à gauche: 56 57
+        à droite: 42 57
+    param <VarDecl *> (68)
+        à gauche: 58
+        à droite: 54 55
+    typeannotation <boost::optional<Symbol>> (69)
+        à gauche: 59 60
+        à droite: 17 18
+
+
+État 0
+
+    0 $accept: . program "end of file"
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    program         aller à l'état 11
+    expr            aller à l'état 12
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 1
+
+   43 seqExpr: "(" . exprs ")"
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    $défaut  réduction par utilisation de la règle 44 (exprs)
+
+    expr            aller à l'état 26
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+    exprs           aller à l'état 27
+    nonemptyexprs   aller à l'état 28
+
+
+État 2
+
+   23 negExpr: "-" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 29
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 3
+
+   38 ifthenelseExpr: "if" . expr "then" expr "else" expr
+   39               | "if" . expr "then" expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 30
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 4
+
+   37 whileExpr: "while" . expr "do" expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 31
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 5
+
+   40 forExpr: "for" . "id" ":=" expr "to" expr "do" expr
+
+    "id"  décalage et aller à l'état 32
+
+
+État 6
+
+   42 letExpr: "let" . decls "in" exprs "end"
+
+    $défaut  réduction par utilisation de la règle 56 (decls)
+
+    decls  aller à l'état 33
+
+
+État 7
+
+   41 breakExpr: "break" .
+
+    $défaut  réduction par utilisation de la règle 41 (breakExpr)
+
+
+État 8
+
+   21 var: "id" .
+   22 callExpr: "id" . "(" arguments ")"
+   36 assignExpr: "id" . ":=" expr
+
+    "("   décalage et aller à l'état 34
+    ":="  décalage et aller à l'état 35
+
+    $défaut  réduction par utilisation de la règle 21 (var)
+
+
+État 9
+
+   20 stringExpr: "string" .
+
+    $défaut  réduction par utilisation de la règle 20 (stringExpr)
+
+
+État 10
+
+   19 intExpr: "integer" .
+
+    $défaut  réduction par utilisation de la règle 19 (intExpr)
+
+
+État 11
+
+    0 $accept: program . "end of file"
+
+    "end of file"  décalage et aller à l'état 36
+
+
+État 12
+
+    1 program: expr .
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 1 (program)
+
+
+État 13
+
+   15 expr: intExpr .
+
+    $défaut  réduction par utilisation de la règle 15 (expr)
+
+
+État 14
+
+    4 expr: stringExpr .
+
+    $défaut  réduction par utilisation de la règle 4 (expr)
+
+
+État 15
+
+    6 expr: var .
+
+    $défaut  réduction par utilisation de la règle 6 (expr)
+
+
+État 16
+
+    7 expr: callExpr .
+
+    $défaut  réduction par utilisation de la règle 7 (expr)
+
+
+État 17
+
+    9 expr: negExpr .
+
+    $défaut  réduction par utilisation de la règle 9 (expr)
+
+
+État 18
+
+    8 expr: opExpr .
+
+    $défaut  réduction par utilisation de la règle 8 (expr)
+
+
+État 19
+
+   10 expr: assignExpr .
+
+    $défaut  réduction par utilisation de la règle 10 (expr)
+
+
+État 20
+
+   11 expr: whileExpr .
+
+    $défaut  réduction par utilisation de la règle 11 (expr)
+
+
+État 21
+
+   16 expr: ifthenelseExpr .
+
+    $défaut  réduction par utilisation de la règle 16 (expr)
+
+
+État 22
+
+   12 expr: forExpr .
+
+    $défaut  réduction par utilisation de la règle 12 (expr)
+
+
+État 23
+
+   13 expr: breakExpr .
+
+    $défaut  réduction par utilisation de la règle 13 (expr)
+
+
+État 24
+
+   14 expr: letExpr .
+
+    $défaut  réduction par utilisation de la règle 14 (expr)
+
+
+État 25
+
+    5 expr: seqExpr .
+
+    $défaut  réduction par utilisation de la règle 5 (expr)
+
+
+État 26
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   46 nonemptyexprs: expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 46 (nonemptyexprs)
+
+
+État 27
+
+   43 seqExpr: "(" exprs . ")"
+
+    ")"  décalage et aller à l'état 49
+
+
+État 28
+
+   45 exprs: nonemptyexprs .
+   47 nonemptyexprs: nonemptyexprs . ";" expr
+
+    ";"  décalage et aller à l'état 50
+
+    $défaut  réduction par utilisation de la règle 45 (exprs)
+
+
+État 29
+
+   23 negExpr: "-" expr .
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    $défaut  réduction par utilisation de la règle 23 (negExpr)
+
+
+État 30
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   38 ifthenelseExpr: "if" expr . "then" expr "else" expr
+   39               | "if" expr . "then" expr
+
+    "+"     décalage et aller à l'état 37
+    "-"     décalage et aller à l'état 38
+    "*"     décalage et aller à l'état 39
+    "/"     décalage et aller à l'état 40
+    "="     décalage et aller à l'état 41
+    "<>"    décalage et aller à l'état 42
+    "<"     décalage et aller à l'état 43
+    "<="    décalage et aller à l'état 44
+    ">"     décalage et aller à l'état 45
+    ">="    décalage et aller à l'état 46
+    "&"     décalage et aller à l'état 47
+    "|"     décalage et aller à l'état 48
+    "then"  décalage et aller à l'état 51
+
+
+État 31
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   37 whileExpr: "while" expr . "do" expr
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+    "do"  décalage et aller à l'état 52
+
+
+État 32
+
+   40 forExpr: "for" "id" . ":=" expr "to" expr "do" expr
+
+    ":="  décalage et aller à l'état 53
+
+
+État 33
+
+   42 letExpr: "let" decls . "in" exprs "end"
+   57 decls: decls . decl
+
+    "in"        décalage et aller à l'état 54
+    "function"  décalage et aller à l'état 55
+    "var"       décalage et aller à l'état 56
+
+    decl      aller à l'état 57
+    varDecl   aller à l'état 58
+    funcDecl  aller à l'état 59
+
+
+État 34
+
+   22 callExpr: "id" "(" . arguments ")"
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    $défaut  réduction par utilisation de la règle 48 (arguments)
+
+    expr               aller à l'état 60
+    intExpr            aller à l'état 13
+    stringExpr         aller à l'état 14
+    var                aller à l'état 15
+    callExpr           aller à l'état 16
+    negExpr            aller à l'état 17
+    opExpr             aller à l'état 18
+    assignExpr         aller à l'état 19
+    whileExpr          aller à l'état 20
+    ifthenelseExpr     aller à l'état 21
+    forExpr            aller à l'état 22
+    breakExpr          aller à l'état 23
+    letExpr            aller à l'état 24
+    seqExpr            aller à l'état 25
+    arguments          aller à l'état 61
+    nonemptyarguments  aller à l'état 62
+
+
+État 35
+
+   36 assignExpr: "id" ":=" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 63
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 36
+
+    0 $accept: program "end of file" .
+
+    $défaut  accepter
+
+
+État 37
+
+   24 opExpr: expr "+" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 64
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 38
+
+   25 opExpr: expr "-" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 65
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 39
+
+   26 opExpr: expr "*" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 66
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 40
+
+   27 opExpr: expr "/" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 67
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 41
+
+   28 opExpr: expr "=" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 68
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 42
+
+   29 opExpr: expr "<>" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 69
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 43
+
+   30 opExpr: expr "<" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 70
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 44
+
+   32 opExpr: expr "<=" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 71
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 45
+
+   31 opExpr: expr ">" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 72
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 46
+
+   33 opExpr: expr ">=" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 73
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 47
+
+   34 opExpr: expr "&" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 74
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 48
+
+   35 opExpr: expr "|" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 75
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 49
+
+   43 seqExpr: "(" exprs ")" .
+
+    $défaut  réduction par utilisation de la règle 43 (seqExpr)
+
+
+État 50
+
+   47 nonemptyexprs: nonemptyexprs ";" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 76
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 51
+
+   38 ifthenelseExpr: "if" expr "then" . expr "else" expr
+   39               | "if" expr "then" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 77
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 52
+
+   37 whileExpr: "while" expr "do" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 78
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 53
+
+   40 forExpr: "for" "id" ":=" . expr "to" expr "do" expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 79
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 54
+
+   42 letExpr: "let" decls "in" . exprs "end"
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    $défaut  réduction par utilisation de la règle 44 (exprs)
+
+    expr            aller à l'état 26
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+    exprs           aller à l'état 80
+    nonemptyexprs   aller à l'état 28
+
+
+État 55
+
+   18 funcDecl: "function" . "id" "(" params ")" typeannotation "=" expr
+
+    "id"  décalage et aller à l'état 81
+
+
+État 56
+
+   17 varDecl: "var" . "id" typeannotation ":=" expr
+
+    "id"  décalage et aller à l'état 82
+
+
+État 57
+
+   57 decls: decls decl .
+
+    $défaut  réduction par utilisation de la règle 57 (decls)
+
+
+État 58
+
+    2 decl: varDecl .
+
+    $défaut  réduction par utilisation de la règle 2 (decl)
+
+
+État 59
+
+    3 decl: funcDecl .
+
+    $défaut  réduction par utilisation de la règle 3 (decl)
+
+
+État 60
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   50 nonemptyarguments: expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 50 (nonemptyarguments)
+
+
+État 61
+
+   22 callExpr: "id" "(" arguments . ")"
+
+    ")"  décalage et aller à l'état 83
+
+
+État 62
+
+   49 arguments: nonemptyarguments .
+   51 nonemptyarguments: nonemptyarguments . "," expr
+
+    ","  décalage et aller à l'état 84
+
+    $défaut  réduction par utilisation de la règle 49 (arguments)
+
+
+État 63
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   36 assignExpr: "id" ":=" expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 36 (assignExpr)
+
+
+État 64
+
+   24 opExpr: expr . "+" expr
+   24       | expr "+" expr .
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 24 (opExpr)
+
+
+État 65
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   25       | expr "-" expr .
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 25 (opExpr)
+
+
+État 66
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   26       | expr "*" expr .
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    $défaut  réduction par utilisation de la règle 26 (opExpr)
+
+
+État 67
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   27       | expr "/" expr .
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    $défaut  réduction par utilisation de la règle 27 (opExpr)
+
+
+État 68
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   28       | expr "=" expr .
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"  décalage et aller à l'état 37
+    "-"  décalage et aller à l'état 38
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 28 (opExpr)
+
+
+État 69
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   29       | expr "<>" expr .
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"  décalage et aller à l'état 37
+    "-"  décalage et aller à l'état 38
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 29 (opExpr)
+
+
+État 70
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   30       | expr "<" expr .
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"  décalage et aller à l'état 37
+    "-"  décalage et aller à l'état 38
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 30 (opExpr)
+
+
+État 71
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   32       | expr "<=" expr .
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"  décalage et aller à l'état 37
+    "-"  décalage et aller à l'état 38
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 32 (opExpr)
+
+
+État 72
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   31       | expr ">" expr .
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"  décalage et aller à l'état 37
+    "-"  décalage et aller à l'état 38
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 31 (opExpr)
+
+
+État 73
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   33       | expr ">=" expr .
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"  décalage et aller à l'état 37
+    "-"  décalage et aller à l'état 38
+    "*"  décalage et aller à l'état 39
+    "/"  décalage et aller à l'état 40
+
+    $défaut  réduction par utilisation de la règle 33 (opExpr)
+
+
+État 74
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   34       | expr "&" expr .
+   35       | expr . "|" expr
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+
+    $défaut  réduction par utilisation de la règle 34 (opExpr)
+
+
+État 75
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   35       | expr "|" expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+
+    $défaut  réduction par utilisation de la règle 35 (opExpr)
+
+
+État 76
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   47 nonemptyexprs: nonemptyexprs ";" expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 47 (nonemptyexprs)
+
+
+État 77
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   38 ifthenelseExpr: "if" expr "then" expr . "else" expr
+   39               | "if" expr "then" expr .
+
+    "+"     décalage et aller à l'état 37
+    "-"     décalage et aller à l'état 38
+    "*"     décalage et aller à l'état 39
+    "/"     décalage et aller à l'état 40
+    "="     décalage et aller à l'état 41
+    "<>"    décalage et aller à l'état 42
+    "<"     décalage et aller à l'état 43
+    "<="    décalage et aller à l'état 44
+    ">"     décalage et aller à l'état 45
+    ">="    décalage et aller à l'état 46
+    "&"     décalage et aller à l'état 47
+    "|"     décalage et aller à l'état 48
+    "else"  décalage et aller à l'état 85
+
+    $défaut  réduction par utilisation de la règle 39 (ifthenelseExpr)
+
+
+État 78
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   37 whileExpr: "while" expr "do" expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 37 (whileExpr)
+
+
+État 79
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   40 forExpr: "for" "id" ":=" expr . "to" expr "do" expr
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+    "to"  décalage et aller à l'état 86
+
+
+État 80
+
+   42 letExpr: "let" decls "in" exprs . "end"
+
+    "end"  décalage et aller à l'état 87
+
+
+État 81
+
+   18 funcDecl: "function" "id" . "(" params ")" typeannotation "=" expr
+
+    "("  décalage et aller à l'état 88
+
+
+État 82
+
+   17 varDecl: "var" "id" . typeannotation ":=" expr
+
+    ":"  décalage et aller à l'état 89
+
+    $défaut  réduction par utilisation de la règle 59 (typeannotation)
+
+    typeannotation  aller à l'état 90
+
+
+État 83
+
+   22 callExpr: "id" "(" arguments ")" .
+
+    $défaut  réduction par utilisation de la règle 22 (callExpr)
+
+
+État 84
+
+   51 nonemptyarguments: nonemptyarguments "," . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 91
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 85
+
+   38 ifthenelseExpr: "if" expr "then" expr "else" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 92
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 86
+
+   40 forExpr: "for" "id" ":=" expr "to" . expr "do" expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 93
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 87
+
+   42 letExpr: "let" decls "in" exprs "end" .
+
+    $défaut  réduction par utilisation de la règle 42 (letExpr)
+
+
+État 88
+
+   18 funcDecl: "function" "id" "(" . params ")" typeannotation "=" expr
+
+    "id"  décalage et aller à l'état 94
+
+    $défaut  réduction par utilisation de la règle 52 (params)
+
+    params          aller à l'état 95
+    nonemptyparams  aller à l'état 96
+    param           aller à l'état 97
+
+
+État 89
+
+   60 typeannotation: ":" . "id"
+
+    "id"  décalage et aller à l'état 98
+
+
+État 90
+
+   17 varDecl: "var" "id" typeannotation . ":=" expr
+
+    ":="  décalage et aller à l'état 99
+
+
+État 91
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   51 nonemptyarguments: nonemptyarguments "," expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 51 (nonemptyarguments)
+
+
+État 92
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   38 ifthenelseExpr: "if" expr "then" expr "else" expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 38 (ifthenelseExpr)
+
+
+État 93
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   40 forExpr: "for" "id" ":=" expr "to" expr . "do" expr
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+    "do"  décalage et aller à l'état 100
+
+
+État 94
+
+   58 param: "id" . ":" "id"
+
+    ":"  décalage et aller à l'état 101
+
+
+État 95
+
+   18 funcDecl: "function" "id" "(" params . ")" typeannotation "=" expr
+
+    ")"  décalage et aller à l'état 102
+
+
+État 96
+
+   53 params: nonemptyparams .
+   55 nonemptyparams: nonemptyparams . "," param
+
+    ","  décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 53 (params)
+
+
+État 97
+
+   54 nonemptyparams: param .
+
+    $défaut  réduction par utilisation de la règle 54 (nonemptyparams)
+
+
+État 98
+
+   60 typeannotation: ":" "id" .
+
+    $défaut  réduction par utilisation de la règle 60 (typeannotation)
+
+
+État 99
+
+   17 varDecl: "var" "id" typeannotation ":=" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 104
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 100
+
+   40 forExpr: "for" "id" ":=" expr "to" expr "do" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 105
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 101
+
+   58 param: "id" ":" . "id"
+
+    "id"  décalage et aller à l'état 106
+
+
+État 102
+
+   18 funcDecl: "function" "id" "(" params ")" . typeannotation "=" expr
+
+    ":"  décalage et aller à l'état 89
+
+    $défaut  réduction par utilisation de la règle 59 (typeannotation)
+
+    typeannotation  aller à l'état 107
+
+
+État 103
+
+   55 nonemptyparams: nonemptyparams "," . param
+
+    "id"  décalage et aller à l'état 94
+
+    param  aller à l'état 108
+
+
+État 104
+
+   17 varDecl: "var" "id" typeannotation ":=" expr .
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 17 (varDecl)
+
+
+État 105
+
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+   40 forExpr: "for" "id" ":=" expr "to" expr "do" expr .
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 40 (forExpr)
+
+
+État 106
+
+   58 param: "id" ":" "id" .
+
+    $défaut  réduction par utilisation de la règle 58 (param)
+
+
+État 107
+
+   18 funcDecl: "function" "id" "(" params ")" typeannotation . "=" expr
+
+    "="  décalage et aller à l'état 109
+
+
+État 108
+
+   55 nonemptyparams: nonemptyparams "," param .
+
+    $défaut  réduction par utilisation de la règle 55 (nonemptyparams)
+
+
+État 109
+
+   18 funcDecl: "function" "id" "(" params ")" typeannotation "=" . expr
+
+    "("        décalage et aller à l'état 1
+    "-"        décalage et aller à l'état 2
+    "if"       décalage et aller à l'état 3
+    "while"    décalage et aller à l'état 4
+    "for"      décalage et aller à l'état 5
+    "let"      décalage et aller à l'état 6
+    "break"    décalage et aller à l'état 7
+    "id"       décalage et aller à l'état 8
+    "string"   décalage et aller à l'état 9
+    "integer"  décalage et aller à l'état 10
+
+    expr            aller à l'état 110
+    intExpr         aller à l'état 13
+    stringExpr      aller à l'état 14
+    var             aller à l'état 15
+    callExpr        aller à l'état 16
+    negExpr         aller à l'état 17
+    opExpr          aller à l'état 18
+    assignExpr      aller à l'état 19
+    whileExpr       aller à l'état 20
+    ifthenelseExpr  aller à l'état 21
+    forExpr         aller à l'état 22
+    breakExpr       aller à l'état 23
+    letExpr         aller à l'état 24
+    seqExpr         aller à l'état 25
+
+
+État 110
+
+   18 funcDecl: "function" "id" "(" params ")" typeannotation "=" expr .
+   24 opExpr: expr . "+" expr
+   25       | expr . "-" expr
+   26       | expr . "*" expr
+   27       | expr . "/" expr
+   28       | expr . "=" expr
+   29       | expr . "<>" expr
+   30       | expr . "<" expr
+   31       | expr . ">" expr
+   32       | expr . "<=" expr
+   33       | expr . ">=" expr
+   34       | expr . "&" expr
+   35       | expr . "|" expr
+
+    "+"   décalage et aller à l'état 37
+    "-"   décalage et aller à l'état 38
+    "*"   décalage et aller à l'état 39
+    "/"   décalage et aller à l'état 40
+    "="   décalage et aller à l'état 41
+    "<>"  décalage et aller à l'état 42
+    "<"   décalage et aller à l'état 43
+    "<="  décalage et aller à l'état 44
+    ">"   décalage et aller à l'état 45
+    ">="  décalage et aller à l'état 46
+    "&"   décalage et aller à l'état 47
+    "|"   décalage et aller à l'état 48
+
+    $défaut  réduction par utilisation de la règle 18 (funcDecl)
