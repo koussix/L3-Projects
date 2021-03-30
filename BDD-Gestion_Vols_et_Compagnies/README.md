@@ -8,4 +8,4 @@
     > 1- Un client posséde 0 ou plusieurs bagages,
     > 2- Un bagage est possédé par un et un seul client.
     > (Migration de l'identifiant du client vers ses bagages)
-3.s Requetes_vues_droits.sql : Requêtes d’interrogation de la base de donnée, la création des vues, et la création des utilisateur, et l’attribution des droits sur la base de donnée. Ce fichier contient aussi des requêtes d’interrogation créées à partir de l’utilisation de vues. (un scénario est décrit dans le fichier et dans le rapport).
+3. Requetes_vues_droits.sql : Requêtes d’interrogation de la base de donnée, la création des vues, et la création des utilisateur, et l’attribution des droits sur la base de donnée. Ce fichier contient aussi des requêtes d’interrogation créées à partir de l’utilisation de vues. (un scénario est décrit dans le fichier et dans le rapport).
