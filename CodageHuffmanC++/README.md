@@ -1,9 +1,3 @@
-# MEMBRES DU GROUPE:
-1. LABCHRI Koceila 21919396
-1. AOUCHICHE Salah 21921706
-
-
-
 ## Troisiéme partie :
 
 1. Dans cette dérniére partie nous avons implementé le décryptage du codage de Huffman 
